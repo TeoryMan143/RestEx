@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
 import { EditUserDto, RegisterUserDto } from './user.dto';
+import { faker } from '@faker-js/faker';
 
 @Injectable()
 export class UserService {
@@ -82,5 +83,17 @@ export class UserService {
         }
 
         return this.userRepository.delete(id);
+    }
+
+    fakeUsers(count: number) {
+        const fakes: RegisterUserDto[] = [];
+        for (let i = 0; i < count; i++) {
+            fakes.push({
+                username: faker.internet.userName(),
+                password: faker.internet.password(),
+                email: faker.internet.email(),
+            });
+        }
+        return this.userRepository.save(fakes);
     }
 }
