@@ -15,7 +15,7 @@ export class UserService {
     async getUser(id: number) {
         const userFound = await this.userRepository.findOne({
             where: {
-                id: id,
+                id,
             },
         });
 
@@ -34,14 +34,24 @@ export class UserService {
     }
 
     async registerUser(user: RegisterUserDto) {
-        const userFound = await this.userRepository.findOne({
+        const userNameFound = await this.userRepository.findOne({
             where: {
                 username: user.username,
             },
         });
+        const emailFound = await this.userRepository.findOne({
+            where: {
+                email: user.email,
+            },
+        });
 
-        if (userFound) {
+        if (userNameFound) {
             return new HttpException('User already exist', HttpStatus.CONFLICT);
+        } else if (emailFound) {
+            return new HttpException(
+                'Email already exist',
+                HttpStatus.CONFLICT
+            );
         } else if (!user.password || !user.username) {
             return new HttpException(
                 'Insert required data',
@@ -52,16 +62,26 @@ export class UserService {
     }
 
     async editUser(id: number, user: EditUserDto) {
-        const userFound = await this.userRepository.findOne({
+        const userNameFound = await this.userRepository.findOne({
             where: {
-                id: id,
+                username: user.username,
+            },
+        });
+        const emailFound = await this.userRepository.findOne({
+            where: {
+                email: user.email,
             },
         });
 
-        if (!userFound) {
+        if (!userNameFound) {
             return new HttpException(
                 'User does not exist',
                 HttpStatus.NOT_FOUND
+            );
+        } else if (emailFound) {
+            return new HttpException(
+                'Email already exist',
+                HttpStatus.CONFLICT
             );
         }
 
@@ -71,7 +91,7 @@ export class UserService {
     async deleteUser(id: number) {
         const userFound = await this.userRepository.findOne({
             where: {
-                id: id,
+                id,
             },
         });
 

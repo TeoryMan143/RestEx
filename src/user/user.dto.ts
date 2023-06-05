@@ -1,18 +1,19 @@
-import { IsEmail } from 'class-validator';
+import { IsEmail } from '@nestjs/class-validator';
 
 export class RegisterUserDto {
     username: string;
     password: string;
 
-    @IsEmail()
+    @IsEmail({})
     email: string;
-
     authStrat?: string;
 }
 
-export interface EditUserDto {
+export class EditUserDto {
     username?: string;
     password?: string;
+
+    @IsEmail()
     email?: string;
     authStrat?: string;
 }

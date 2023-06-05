@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@nestjs/class-validator':
+    specifier: ^0.13.4
+    version: 0.13.4
   '@nestjs/common':
     specifier: ^9.0.0
     version: 9.0.0(class-transformer@0.5.1)(class-validator@0.14.0)(reflect-metadata@0.1.13)(rxjs@7.2.0)
@@ -846,6 +849,13 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.15
+
+  /@nestjs/class-validator@0.13.4:
+    resolution: {integrity: sha512-/mqZL36LJ5uV5WDhi87Cd52IssuO+SStaOr2+6sBsvCCGUWkoJes4Wwzmm3m/gdHH+tsNxX60sVSzYcU6hAy9Q==}
+    dependencies:
+      libphonenumber-js: 1.10.33
+      validator: 13.9.0
+    dev: false
 
   /@nestjs/cli@9.0.0:
     resolution: {integrity: sha512-xT5uOoIEcaB/Fn6UeF7atfKqKiEEsTeRKPiM55p+e5H9WVw8FC2r4ceZgaINJbsw0QWskVj/ZQadMo6dA6hXxw==}
