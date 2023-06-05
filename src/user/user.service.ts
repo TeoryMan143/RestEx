@@ -116,4 +116,8 @@ export class UserService {
         }
         return this.userRepository.save(fakes);
     }
+
+    getUsersWithPosts() {
+        return this.userRepository.find({ relations: ['posts'] });
+    }
 }

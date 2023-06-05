@@ -48,4 +48,9 @@ export class UserController {
     fakeUsers(@Param('count', ParseIntPipe) count: number) {
         return this.userService.fakeUsers(count);
     }
+
+    @Get('has-published/')
+    hasPublished() {
+        return this.userService.getUsersWithPosts();
+    }
 }
