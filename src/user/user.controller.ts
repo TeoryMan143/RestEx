@@ -18,6 +18,11 @@ import { EditUserDto, RegisterUserDto } from './user.dto';
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
+    @Get('hasPublished')
+    hasPublished() {
+        return this.userService.getUsersWithPosts();
+    }
+
     @Get(':id')
     getUser(@Param('id', ParseIntPipe) id: number) {
         return this.userService.getUser(id);
@@ -47,10 +52,5 @@ export class UserController {
     @Put('gen/:count')
     fakeUsers(@Param('count', ParseIntPipe) count: number) {
         return this.userService.fakeUsers(count);
-    }
-
-    @Get('has-published/')
-    hasPublished() {
-        return this.userService.getUsersWithPosts();
     }
 }

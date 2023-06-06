@@ -118,6 +118,9 @@ export class UserService {
     }
 
     getUsersWithPosts() {
-        return this.userRepository.find({ relations: ['posts'] });
+        return this.userRepository
+            .createQueryBuilder('user')
+            .innerJoin('post', 'post', 'user.id = post.authorId')
+            .getMany();
     }
 }

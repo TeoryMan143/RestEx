@@ -28,6 +28,6 @@ export class User {
     @Column({ nullable: true })
     authStrat: string;
 
-    @OneToMany(() => Post, (post) => post.author)
+    @OneToMany(() => Post, (post) => post.author, { cascade: true })
     posts: Post[];
 }
