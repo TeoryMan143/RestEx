@@ -7,7 +7,6 @@ import {
     ParseIntPipe,
     Patch,
     Post,
-    Put,
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto, EditPostDto } from './post.dto';
@@ -39,10 +38,5 @@ export class PostController {
     @Delete(':id')
     deletePost(@Param('id', ParseIntPipe) id: number) {
         return this.postService.deletePost(id);
-    }
-
-    @Put(':count')
-    fakePosts(@Param('count', ParseIntPipe) count: number) {
-        return this.postService.fakePosts(count);
     }
 }
