@@ -4,6 +4,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Post } from './post.entity';
 import { CreatePostDto, EditPostDto } from './post.dto';
 import { UserService } from '../user/user.service';
+import { User } from '../user/user.entity';
+import { faker } from '@faker-js/faker';
 
 @Injectable()
 export class PostService {
@@ -74,5 +76,26 @@ export class PostService {
         }
 
         return this.postRepository.delete(id);
+    }
+
+    async fakePosts(count: number) {
+        const fakes: CreatePostDto[] = [];
+        for (let i = 0; i < count; i++) {
+            const authorId = faker.number.int({ max: 26 });
+            const userFound: User | HttpException =
+                await this.userService.getUser(authorId);
+
+            if (userFound instanceof HttpException) {
+                continue;
+            }
+
+            fakes.push({
+                title: faker.lorem.words(),
+                body: faker.lorem.paragraphs(),
+                authorId,
+            });
+        }
+
+        return this.postRepository.save(fakes);
     }
 }

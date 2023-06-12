@@ -7,6 +7,7 @@ import {
     ParseIntPipe,
     Patch,
     Post,
+    Put,
     UsePipes,
     ValidationPipe,
 } from '@nestjs/common';
@@ -46,5 +47,10 @@ export class UserController {
     @Delete(':id')
     deleteUser(@Param('id', ParseIntPipe) id: number) {
         return this.userService.deleteUser(id);
+    }
+
+    @Put(':count')
+    fakes(@Param('count', ParseIntPipe) count: number) {
+        return this.userService.fakeUsers(count);
     }
 }
